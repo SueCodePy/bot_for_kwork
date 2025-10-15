@@ -1,0 +1,24 @@
+# Секреты
+.env
+
+# Виртуальное окружение
+.venv/
+
+# Кэш Python
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.idea/
+.vscode/
+
+# Логи
+*.log
+
+# Alembic (можно оставить конфиг локально, если не нужен в Git)
+alembic.ini
+
+# pytest / coverage
+.coverage
+htmlcov/
