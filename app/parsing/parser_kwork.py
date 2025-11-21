@@ -2,12 +2,10 @@ import aiohttp
 import asyncio
 from config.config import settings
 from app.data_base.crud import add_kwork
-import json
 
 
 cookies = settings.cookies
 headers = settings.headers
-
 
 
 async def run_parser():
@@ -42,11 +40,8 @@ async def run_parser():
                     if is_new:
                         list_kwork_id.append(int(el['id']))
 
-                print(page, last_page)
             page += 1
             await asyncio.sleep(1)
-
-
 
     return list_kwork_id
 

@@ -14,3 +14,4 @@ def show_first_kwork_keyboard():
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[[InlineKeyboardButton(text='Показать первый кворк из списка', callback_data='view_data')]])
     return keyboard
+

@@ -11,6 +11,7 @@ from app.bot.bot import bot
 
 logging.basicConfig(level=logging.INFO)
 
+
 async def notifier():
     while True:
         try:
@@ -22,13 +23,11 @@ async def notifier():
                 all_user = await get_all_users()
                 logging.info(f"[notifier] найдено {len(users_waiting)} пользователей в ожидании")
 
-
                 for user in all_user:
                     if user:
                         await assign_kworks_to_user(user, kwork_id)
 
                         if users_waiting and user in users_waiting:
-
                             try:
                                 logging.info(f"[notifier] отправляю сообщение пользователю {user}")
                                 await bot.send_message(
@@ -37,17 +36,17 @@ async def notifier():
                                         reply_markup=show_first_kwork_keyboard()  )
                                 await delete_user_in_waiting(user)
                                 logging.info(f"[notifier] пользователь {user} удалён из ожидания")
+
                             except TelegramForbiddenError:            # если пользователь заблокировал бота
                                 logging.warning(f"[notifier] пользователь {user} заблокировал бота")
                                 await delete_user_in_waiting(user)
+
                             except TelegramBadRequest as e:          # если проблема со стороны интернета
                                 logging.error(f"[notifier] TelegramBadRequest для {user}: {e}")
 
         except asyncio.CancelledError:
-
             logging.info("[notifier] задача была отменена")
             raise  # обязательно пробрасываем, чтобы on_shutdown отработал правильно
-
 
         except Exception as e:
             logging.error(f"[notifier] глобальная ошибка: {e}")
